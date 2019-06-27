@@ -1,50 +1,6 @@
 <template>
   <div class="bgc">
-    <div class="left-muem">
-      <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-        <el-radio-button :label="false" class="left-btn">展开</el-radio-button>
-        <el-radio-button :label="true" class="left-btn">收起</el-radio-button>
-      </el-radio-group>
-      <el-menu
-        default-active="1-4-1"
-        class="el-menu-vertical-demo"
-        @open="handleOpen"
-        @close="handleClose"
-        :collapse="isCollapse"
-      >
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-location"></i>
-            <span slot="title">类别</span>
-          </template>
-          <el-menu-item-group>
-            <!-- <span slot="title">分组一</span> -->
-            <el-menu-item index="1-1">教育</el-menu-item>
-            <el-menu-item index="1-2">爱国</el-menu-item>
-            <el-menu-item index="1-3">热血</el-menu-item>
-          </el-menu-item-group>
-          <!-- <el-menu-item-group title="推荐"> -->
-          <el-menu-item index="1-4">励志</el-menu-item>
-          <!-- </el-menu-item-group> -->
-          <el-submenu index="1-5">
-            <span slot="title">更多</span>
-            <el-menu-item index="1-5-1">科学</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="2">
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <i class="el-icon-document"></i>
-          <span slot="title">导航三</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <i class="el-icon-setting"></i>
-          <span slot="title">导航四</span>
-        </el-menu-item>
-      </el-menu>
-    </div>
+    <zhuye-menu></zhuye-menu>
 
     <div class="main-Show">
 
@@ -56,9 +12,13 @@
         <img :src="img.url" class="book1 img-circle">
       </div>
       <div class="book-content">
-        <input type="button" class="btn-buy btn btn-danger" value="立即购买" @click="buy">
+        <!-- <input type="button" class="btn-buy btn btn-danger" value="立即购买" @click="buy"> -->
+        <a class="btn-buy" @click="buy">立即购买<span class="glyphicon glyphicon-chevron-right"></span></a>
+
         <br>
-        <input type="button" class="btn-buycar btn btn-warning" value="加入购物车" @click="flag = !flag">
+        <!-- <input type="button" class="btn-buycar btn btn-warning" value="加入购物车" @click="flag = !flag"> -->
+        <a class="btn-buycar">加入购物车<span class="glyphicon glyphicon-chevron-right"></span></a>
+
       </div>
 
 
@@ -68,18 +28,24 @@
         <img :src="img.url" class="book2 img-circle">
       </div>
       <div class="book-content1">
-        <input type="button" class="btn-buy btn btn-danger" value="立即购买">
+        <!-- <input type="button" class="btn-buy btn btn-danger" value="立即购买"> -->
+        <a class="btn-buy">立即购买<span class="glyphicon glyphicon-chevron-right"></span></a>
         <br>
-        <input type="button" class="btn-buycar btn btn-warning" value="加入购物车" @click="flag = !flag">
+        <!-- <input type="button" class="btn-buycar btn btn-warning" value="加入购物车" @click="flag = !flag"> -->
+        <a class="btn-buycar">加入购物车<span class="glyphicon glyphicon-chevron-right"></span></a>
+
       </div>
 
       <div class="Picmain-left1">
         <img :src="img.url" class="book2 img-circle">
       </div>
       <div class="book-content1">
-        <input type="button" class="btn-buy btn btn-danger" value="立即购买">
+        <!-- <input type="button" class="btn-buy btn btn-danger" value="立即购买"> -->
+        <a class="btn-buy">立即购买<span class="glyphicon glyphicon-chevron-right"></span></a>
         <br>
-        <input type="button" class="btn-buycar btn btn-warning" value="加入购物车" @click="flag = !flag">
+        <!-- <input type="button" class="btn-buycar btn btn-warning" value="加入购物车" @click="flag = !flag"> -->
+        <a class="btn-buycar">加入购物车<span class="glyphicon glyphicon-chevron-right"></span></a>
+        
       </div>
     </div>
   </div>
@@ -89,13 +55,12 @@
 
 <script>
 import book1 from "../../img/book1.jpg";
-
+import ZhuyeMenu from "./zhuyeComponents/menu.vue"
 export default {
   data() {
     return {
       activeIndex: "1",
       activeIndex2: "1",
-      isCollapse: true,
       img: {
         url: book1
       },
@@ -104,17 +69,8 @@ export default {
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
     buy(){
-      this.$router.push("/buy");
+      // this.$router.push("/Catbuy");
     },
     brforeEnter(el) {
       // el.style.transform = "translate(340px,200px)";
@@ -136,19 +92,18 @@ export default {
       this.flag = false;
 
     }
+  },
+  components:{
+    ZhuyeMenu
   }
 };
 </script>
 
-<style>
+<style scoped> 
 .bgc {
   width: 100%;
   height: 100%;
-  background-color: #d3d7d4;
-}
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 400px;
+  background-color: #f2f2f2;
 }
 .left-btn {
   position: relative;
@@ -181,19 +136,22 @@ export default {
   left: 500px;
   width: 800px;
   height: 200px;
-  border: 1px solid #74787c;
+  border: 1px solid #f2f2f2;
   border-radius: 12px;
-  background-color: #d9d6c3;
+  /* background-color: #d9d6c3; */
+  background-color: white;
 }
 .btn-buy {
   position: absolute;
   left: 600px;
-  top: 40px;
+  top: 60px;
+  cursor: pointer;
 }
 .btn-buycar {
   position: absolute;
   left: 595px;
-  top: 100px;
+  top: 120px;
+  cursor: pointer;
 }
 
 .book2 {
@@ -213,9 +171,9 @@ export default {
   left: 500px;
   width: 800px;
   height: 200px;
-  border: 1px solid #74787c;
+  border: 1px solid #f2f2f2;
   border-radius: 12px;
-  background-color: #d9d6c3;
+  background-color: white;
 }
 .ball {
   position: absolute;
@@ -228,6 +186,4 @@ export default {
   left: 1100px;
 }
 
-</style>
-<style  scoped>
 </style>
